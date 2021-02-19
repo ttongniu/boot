@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.boot.mybatis.mapper.PermissionDAO">
+  <resultMap id="BaseResultMap" type="com.example.boot.mybatis.entity.Permission">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="c" jdbcType="TINYINT" property="c" />
+    <result column="r" jdbcType="TINYINT" property="r" />
+    <result column="u" jdbcType="TINYINT" property="u" />
+    <result column="d" jdbcType="TINYINT" property="d" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uri, `name`, `c`, r, u, d
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.boot.mybatis.entity.Permission" useGeneratedKeys="true">
+    insert into permission (uri, `name`, `c`,
+                            r, u, d)
+    values (#{uri,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{c,jdbcType=TINYINT},
+            #{r,jdbcType=TINYINT}, #{u,jdbcType=TINYINT}, #{d,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.boot.mybatis.entity.Permission" useGeneratedKeys="true">
+    insert into permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uri != null">
+        uri,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="c != null">
+        `c`,
+      </if>
+      <if test="r != null">
+        r,
+      </if>
+      <if test="u != null">
+        u,
+      </if>
+      <if test="d != null">
+        d,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uri != null">
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="c != null">
+        #{c,jdbcType=TINYINT},
+      </if>
+      <if test="r != null">
+        #{r,jdbcType=TINYINT},
+      </if>
+      <if test="u != null">
+        #{u,jdbcType=TINYINT},
+      </if>
+      <if test="d != null">
+        #{d,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.boot.mybatis.entity.Permission">
+    update permission
+    <set>
+      <if test="uri != null">
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="c != null">
+        `c` = #{c,jdbcType=TINYINT},
+      </if>
+      <if test="r != null">
+        r = #{r,jdbcType=TINYINT},
+      </if>
+      <if test="u != null">
+        u = #{u,jdbcType=TINYINT},
+      </if>
+      <if test="d != null">
+        d = #{d,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.boot.mybatis.entity.Permission">
+    update permission
+    set uri = #{uri,jdbcType=VARCHAR},
+        `name` = #{name,jdbcType=VARCHAR},
+        `c` = #{c,jdbcType=TINYINT},
+        r = #{r,jdbcType=TINYINT},
+        u = #{u,jdbcType=TINYINT},
+        d = #{d,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
